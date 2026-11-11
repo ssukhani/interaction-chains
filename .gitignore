@@ -1,0 +1,12 @@
+target/
+.idea/
+*.iml
+.classpath
+.project
+.settings/
+__pycache__/
+*.py[cod]
+.venv/
+.python-version
+*.log
+.DS_Store

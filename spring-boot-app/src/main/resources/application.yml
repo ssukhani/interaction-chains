@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: interaction-chains
+
+server:
+  port: 8080
+
+interaction-chains:
+  python-service:
+    base-url: http://localhost:8081

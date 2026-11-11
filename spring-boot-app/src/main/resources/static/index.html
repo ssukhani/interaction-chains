@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Analyst · Interaction chains</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header>
+    <div>
+      <p class="eyebrow">Account opening estate</p>
+      <h1>Interaction chains</h1>
+    </div>
+    <nav>
+      <a href="/" aria-current="page">Analyst</a>
+      <a href="/engineer.html">Engineer</a>
+    </nav>
+  </header>
+  <main>
+    <section class="panel">
+      <label for="sentence">Proposed change</label>
+      <textarea id="sentence" placeholder="Add sanctions screening to opening an account"></textarea>
+      <div class="examples">
+        <button type="button" class="secondary" data-example="Add sanctions screening to opening an account">Sanctions screening</button>
+        <button type="button" class="secondary" data-example="Update the KYC check used in account opening">Update KYC</button>
+      </div>
+      <div class="row">
+        <button type="button" id="analyze">Analyze</button>
+      </div>
+    </section>
+    <div id="result" class="result" aria-live="polite"></div>
+  </main>
+  <script src="/ba.js"></script>
+</body>
+</html>

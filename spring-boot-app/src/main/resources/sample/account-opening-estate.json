@@ -1,0 +1,96 @@
+{
+  "applications": [
+    {"id": "web-ui", "name": "Web Onboarding UI", "team": "Digital Channels"},
+    {"id": "mobile-ui", "name": "Mobile Onboarding UI", "team": "Digital Channels"},
+    {"id": "branch-ui", "name": "Branch Onboarding UI", "team": "Branch Channels"},
+    {"id": "orchestrator", "name": "Onboarding Orchestrator", "team": "Customer Origination"},
+    {"id": "kyc", "name": "KYC Service", "team": "Financial Crime"},
+    {"id": "product-setup", "name": "Product Setup", "team": "Deposits"},
+    {"id": "cif", "name": "CIF Open", "team": "Core Banking"}
+  ],
+  "operations": [
+    {"id": "web-post-applications", "applicationId": "web-ui", "name": "POST /applications"},
+    {"id": "mobile-post-applications", "applicationId": "mobile-ui", "name": "POST /applications"},
+    {"id": "branch-start", "applicationId": "branch-ui", "name": "START ACCOUNT-OPEN"},
+    {"id": "orch-start", "applicationId": "orchestrator", "name": "POST /onboarding/start"},
+    {"id": "kyc-verify", "applicationId": "kyc", "name": "POST /verify"},
+    {"id": "product-post", "applicationId": "product-setup", "name": "POST /products"},
+    {"id": "cif-opncif", "applicationId": "cif", "name": "CICS OPNCIF"}
+  ],
+  "journeys": [
+    {
+      "id": "web-account-open",
+      "name": "Web account open",
+      "channel": "web",
+      "hops": [
+        {"applicationId": "web-ui", "operationId": "web-post-applications"},
+        {"applicationId": "orchestrator", "operationId": "orch-start"},
+        {"applicationId": "kyc", "operationId": "kyc-verify"},
+        {"applicationId": "product-setup", "operationId": "product-post"},
+        {"applicationId": "cif", "operationId": "cif-opncif"}
+      ]
+    },
+    {
+      "id": "mobile-account-open",
+      "name": "Mobile account open",
+      "channel": "mobile",
+      "hops": [
+        {"applicationId": "mobile-ui", "operationId": "mobile-post-applications"},
+        {"applicationId": "orchestrator", "operationId": "orch-start"},
+        {"applicationId": "kyc", "operationId": "kyc-verify"},
+        {"applicationId": "product-setup", "operationId": "product-post"},
+        {"applicationId": "cif", "operationId": "cif-opncif"}
+      ]
+    },
+    {
+      "id": "branch-account-open",
+      "name": "Branch account open",
+      "channel": "branch",
+      "hops": [
+        {"applicationId": "branch-ui", "operationId": "branch-start"},
+        {"applicationId": "orchestrator", "operationId": "orch-start"},
+        {"applicationId": "product-setup", "operationId": "product-post"},
+        {"applicationId": "cif", "operationId": "cif-opncif"}
+      ]
+    }
+  ],
+  "traces": [
+    {
+      "id": "T-WEB-100",
+      "journeyId": "web-account-open",
+      "spans": [
+        {"applicationId": "web-ui", "operationId": "web-post-applications", "time": "2026-04-02T14:01:00Z", "status": "success"},
+        {"applicationId": "orchestrator", "operationId": "orch-start", "time": "2026-04-02T14:01:01Z", "status": "success"},
+        {"applicationId": "kyc", "operationId": "kyc-verify", "time": "2026-04-02T14:01:02Z", "status": "success"},
+        {"applicationId": "product-setup", "operationId": "product-post", "time": "2026-04-02T14:01:03Z", "status": "success"},
+        {"applicationId": "cif", "operationId": "cif-opncif", "time": "2026-04-02T14:01:04Z", "status": "success"}
+      ]
+    },
+    {
+      "id": "T-MOB-100",
+      "journeyId": "mobile-account-open",
+      "spans": [
+        {"applicationId": "orchestrator", "operationId": "orch-start", "time": "2026-04-02T14:05:01Z", "status": "success"},
+        {"applicationId": "kyc", "operationId": "kyc-verify", "time": "2026-04-02T14:05:02Z", "status": "success"},
+        {"applicationId": "product-setup", "operationId": "product-post", "time": "2026-04-02T14:05:03Z", "status": "success"},
+        {"applicationId": "cif", "operationId": "cif-opncif", "time": "2026-04-02T14:05:04Z", "status": "success"}
+      ]
+    }
+  ],
+  "declaredEdges": [
+    {
+      "id": "ADR-014",
+      "source": "ADR-014",
+      "journeyId": "branch-account-open",
+      "fromApplicationId": "branch-ui",
+      "toApplicationId": "orchestrator"
+    },
+    {
+      "id": "ADR-022",
+      "source": "ADR-022",
+      "journeyId": "branch-account-open",
+      "fromApplicationId": "orchestrator",
+      "toApplicationId": "kyc"
+    }
+  ]
+}

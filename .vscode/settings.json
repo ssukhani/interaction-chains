@@ -1,0 +1,20 @@
+{
+  "java.jdt.ls.java.home": "/Users/Sharad.Sukhani/.local/jdks/temurin-21/Contents/Home",
+  "java.configuration.runtimes": [
+    {
+      "name": "JavaSE-21",
+      "path": "/Users/Sharad.Sukhani/.local/jdks/temurin-21/Contents/Home",
+      "default": true
+    }
+  ],
+  "java.import.maven.enabled": true,
+  "java.configuration.updateBuildConfiguration": "automatic",
+  "maven.executable.path": "/Users/Sharad.Sukhani/.local/apache-maven/bin/mvn",
+  "maven.terminal.customEnv": [
+    {
+      "environmentVariable": "JAVA_HOME",
+      "value": "/Users/Sharad.Sukhani/.local/jdks/temurin-21/Contents/Home"
+    }
+  ],
+  "python.defaultInterpreterPath": "/usr/bin/python3"
+}
